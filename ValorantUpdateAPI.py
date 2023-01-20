@@ -22,8 +22,8 @@ TOKEN = os.getenv('TOKEN')
 channel_id = os.getenv('channel_id')  
 
 try:
-
-    mongoClient = MongoClient('mongodb+srv://handler:xS1kr8PNEtO9Vpgl@main.ua2da.mongodb.net/?retryWrites=true&w=majority')
+    URI = os.getenv('URI')
+    mongoClient = MongoClient(URI)
     db = mongoClient.ApiCalls
     collection = db.ValorantPatchVersion
     print('Conected to db sucesfully')
