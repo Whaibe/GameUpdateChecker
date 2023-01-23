@@ -8,6 +8,7 @@ import json
 import pymongo
 from pymongo import MongoClient
 import os
+import random
 
 botDescription="Bot"
 intents = discord.Intents.all()
@@ -20,6 +21,9 @@ load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
 channel_id = os.getenv('channel_id')  
+
+
+users = ['@El Dani','@EL Mr.Valo','@El Gi0hno','@El Braulio']
 
 try:
     URI = os.getenv('URI')
@@ -97,6 +101,9 @@ async def on_message(message):
 
     if message.content.startswith('!va'):
         await message.channel.send('Orale pinches jotos vamos a juegar @everyone')
+    
+    if message.content.startswith('!gei'):
+        await message.channel.send(f'Definitivamente eres el mas gei aqui {users[random.randint(0,3)]}')
 
 
 client.run(TOKEN)
