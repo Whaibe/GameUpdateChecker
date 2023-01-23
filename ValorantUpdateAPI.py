@@ -65,7 +65,7 @@ def pingAPI():
     
     if pingedVersion != CurrentgameVersion: # enter the time you wish 
         print("Update found, bot will proceed to send msg")
-        collection.insert_one(data)
+        collection.insert_one(res_json)
         return True
     else:
         print('No update found, pinging again in x seconds')
@@ -80,7 +80,7 @@ async def on_ready():
     change_status.start()
 
 
-@tasks.loop(seconds=10)
+@tasks.loop(seconds=60)
 async def change_status():
     isThereUpdate = pingAPI()
     if isThereUpdate:
@@ -89,6 +89,16 @@ async def change_status():
         await channel.send('Hay update malditos malcriados @everyone')
 
     
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('!va'):
+        await message.channel.send('Orale pinches jotos vamos a juegar @everyone')
+
+
 client.run(TOKEN)
 
 
