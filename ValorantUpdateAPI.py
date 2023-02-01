@@ -85,7 +85,7 @@ async def on_ready():
     change_status.start()
 
 
-@tasks.loop(seconds=30)
+@tasks.loop(seconds=28800)
 async def change_status():
     isThereUpdate = pingAPI()
     if isThereUpdate:
