@@ -15,12 +15,13 @@ intents = discord.Intents.all()
 client = commands.Bot(command_prefix="?", help_command=None, description=botDescription, intents=intents)
 delay = 82800
 CurrentgameVersion = 0
+pingedVersion = 0
 
 from dotenv import load_dotenv
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
-channel_id = os.getenv('channel_id')  
+channel_id = int(os.getenv('channel_id'))
 
 
 users = ['@El Dani','@EL Mr.Valo','@El Gi0hno','@El Braulio']
@@ -53,7 +54,7 @@ def pingAPI():
     print('pingin to check Game Version...')
     response = requests.get('https://valorant-api.com/v1/version')
     res_json = response.json()
-
+    print(res_json)
     pingedVersion = res_json['data']['version']
     pprint('Pinged version = ' + pingedVersion)
 
@@ -84,7 +85,7 @@ async def on_ready():
     change_status.start()
 
 
-@tasks.loop(seconds=60)
+@tasks.loop(seconds=30)
 async def change_status():
     isThereUpdate = pingAPI()
     if isThereUpdate:
