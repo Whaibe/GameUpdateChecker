@@ -1,5 +1,5 @@
 discord.py
 requests
-pprint
+pprintpp
 pymongo
-
+python-dotenv
